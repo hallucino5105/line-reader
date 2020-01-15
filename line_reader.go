@@ -47,8 +47,6 @@ func (p *LineReader) Open() error {
 	}
 	p.LineNum = num
 
-	fmt.Println("line num:", p.LineNum)
-
 	return nil
 }
 
