@@ -11,6 +11,13 @@ import (
 	"github.com/stoicperlman/fls"
 )
 
+type EOFFileError struct {
+}
+
+func (p EOFFileError) Error() string {
+	return io.EOF.Error()
+}
+
 type LineReader struct {
 	Filepath string
 	LineNum  int64
@@ -69,7 +76,7 @@ func (p *LineReader) ReadLineMultiN(num int64, skip int64) ([]byte, error) {
 	if skip != 0 {
 		_, err := p.seek(skip, io.SeekStart)
 		if err != nil {
-			if err.Error() == "EOF" {
+			if err == io.EOF {
 				if p.LineNum <= num {
 					return p.ReadAll()
 				} else {

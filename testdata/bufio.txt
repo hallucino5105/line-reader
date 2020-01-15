@@ -1,49 +1,48 @@
-Constants
-Variables
-func ScanBytes(data []byte, atEOF bool) (advance int, token []byte, err error)
-func ScanLines(data []byte, atEOF bool) (advance int, token []byte, err error)
-func ScanRunes(data []byte, atEOF bool) (advance int, token []byte, err error)
-func ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error)
-type ReadWriter
-    func NewReadWriter(r *Reader, w *Writer) *ReadWriter
-type Reader
-    func NewReader(rd io.Reader) *Reader
-    func NewReaderSize(rd io.Reader, size int) *Reader
-    func (b *Reader) Buffered() int
-    func (b *Reader) Discard(n int) (discarded int, err error)
-    func (b *Reader) Peek(n int) ([]byte, error)
-    func (b *Reader) Read(p []byte) (n int, err error)
-    func (b *Reader) ReadByte() (byte, error)
-    func (b *Reader) ReadBytes(delim byte) ([]byte, error)
-    func (b *Reader) ReadLine() (line []byte, isPrefix bool, err error)
-    func (b *Reader) ReadRune() (r rune, size int, err error)
-    func (b *Reader) ReadSlice(delim byte) (line []byte, err error)
-    func (b *Reader) ReadString(delim byte) (string, error)
-    func (b *Reader) Reset(r io.Reader)
-    func (b *Reader) Size() int
-    func (b *Reader) UnreadByte() error
-    func (b *Reader) UnreadRune() error
-    func (b *Reader) WriteTo(w io.Writer) (n int64, err error)
-type Scanner
-    func NewScanner(r io.Reader) *Scanner
-    func (s *Scanner) Buffer(buf []byte, max int)
-    func (s *Scanner) Bytes() []byte
-    func (s *Scanner) Err() error
-    func (s *Scanner) Scan() bool
-    func (s *Scanner) Split(split SplitFunc)
-    func (s *Scanner) Text() string
-type SplitFunc
-type Writer
-    func NewWriter(w io.Writer) *Writer
-    func NewWriterSize(w io.Writer, size int) *Writer
-    func (b *Writer) Available() int
-    func (b *Writer) Buffered() int
-    func (b *Writer) Flush() error
-    func (b *Writer) ReadFrom(r io.Reader) (n int64, err error)
-    func (b *Writer) Reset(w io.Writer)
-    func (b *Writer) Size() int
-    func (b *Writer) Write(p []byte) (nn int, err error)
-    func (b *Writer) WriteByte(c byte) error
-    func (b *Writer) WriteRune(r rune) (size int, err error)
-    func (b *Writer) WriteString(s string) (int, error)
-
+01: Constants
+02: Variables
+03: func ScanBytes(data []byte, atEOF bool) (advance int, token []byte, err error)
+04: func ScanLines(data []byte, atEOF bool) (advance int, token []byte, err error)
+05: func ScanRunes(data []byte, atEOF bool) (advance int, token []byte, err error)
+06: func ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error)
+07: type ReadWriter
+08:     func NewReadWriter(r *Reader, w *Writer) *ReadWriter
+09: type Reader
+10:     func NewReader(rd io.Reader) *Reader
+11:     func NewReaderSize(rd io.Reader, size int) *Reader
+12:     func (b *Reader) Buffered() int
+13:     func (b *Reader) Discard(n int) (discarded int, err error)
+14:     func (b *Reader) Peek(n int) ([]byte, error)
+15:     func (b *Reader) Read(p []byte) (n int, err error)
+16:     func (b *Reader) ReadByte() (byte, error)
+17:     func (b *Reader) ReadBytes(delim byte) ([]byte, error)
+18:     func (b *Reader) ReadLine() (line []byte, isPrefix bool, err error)
+19:     func (b *Reader) ReadRune() (r rune, size int, err error)
+20:     func (b *Reader) ReadSlice(delim byte) (line []byte, err error)
+21:     func (b *Reader) ReadString(delim byte) (string, error)
+22:     func (b *Reader) Reset(r io.Reader)
+23:     func (b *Reader) Size() int
+24:     func (b *Reader) UnreadByte() error
+25:     func (b *Reader) UnreadRune() error
+26:     func (b *Reader) WriteTo(w io.Writer) (n int64, err error)
+27: type Scanner
+28:     func NewScanner(r io.Reader) *Scanner
+29:     func (s *Scanner) Buffer(buf []byte, max int)
+30:     func (s *Scanner) Bytes() []byte
+31:     func (s *Scanner) Err() error
+32:     func (s *Scanner) Scan() bool
+33:     func (s *Scanner) Split(split SplitFunc)
+34:     func (s *Scanner) Text() string
+35: type SplitFunc
+36: type Writer
+37:     func NewWriter(w io.Writer) *Writer
+38:     func NewWriterSize(w io.Writer, size int) *Writer
+39:     func (b *Writer) Available() int
+40:     func (b *Writer) Buffered() int
+41:     func (b *Writer) Flush() error
+42:     func (b *Writer) ReadFrom(r io.Reader) (n int64, err error)
+43:     func (b *Writer) Reset(w io.Writer)
+44:     func (b *Writer) Size() int
+45:     func (b *Writer) Write(p []byte) (nn int, err error)
+46:     func (b *Writer) WriteByte(c byte) error
+47:     func (b *Writer) WriteRune(r rune) (size int, err error)
+48:     func (b *Writer) WriteString(s string) (int, error)

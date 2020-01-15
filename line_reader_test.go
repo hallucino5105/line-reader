@@ -2,6 +2,7 @@ package line_reader
 
 import (
 	"fmt"
+	"io"
 	"testing"
 )
 
@@ -58,4 +59,20 @@ func TestLineReader3(t *testing.T) {
 		t.Fatal(err)
 	}
 	fmt.Print(string(buf2))
+}
+
+func TestLineReader4(t *testing.T) {
+	mr := createLineReader(t)
+	defer mr.Close()
+
+	mr.seek(0, io.SeekStart)
+	buf, err := mr.read(50)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Print(string(buf))
+
+	pos, err := mr.seek(0, io.SeekCurrent)
+	fmt.Println(pos, err)
 }
