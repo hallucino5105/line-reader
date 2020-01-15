@@ -41,3 +41,21 @@ func TestLineReader2(t *testing.T) {
 
 	fmt.Println(string(buf))
 }
+
+func TestLineReader3(t *testing.T) {
+	mr := createLineReader(t)
+	defer mr.Close()
+
+	buf1, err := mr.ReadLineMultiN(10, 5)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Print(string(buf1))
+	fmt.Println("===")
+
+	buf2, err := mr.ReadLineMultiN(10, 5)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Print(string(buf2))
+}

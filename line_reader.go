@@ -16,7 +16,6 @@ type LineReader struct {
 	LineNum  int64
 
 	fd         *fls.File
-	scanner    *bufio.Scanner
 	buf        []byte
 	delimiters []byte
 }
@@ -39,7 +38,6 @@ func (p *LineReader) Open() error {
 		return errors.Wrap(err, "can not open file")
 	}
 	p.fd = fd
-	p.scanner = bufio.NewScanner(p.fd)
 
 	num, err := p.lineCounter()
 	if err != nil {
@@ -66,9 +64,9 @@ func (p *LineReader) ReadLineMultiN(num int64, skip int64) ([]byte, error) {
 		return nil, fmt.Errorf("file not open")
 	}
 
-	if skip == 0 {
-		p.seek(0, io.SeekStart)
-	} else {
+	p.seek(0, io.SeekStart)
+
+	if skip != 0 {
 		_, err := p.seek(skip, io.SeekStart)
 		if err != nil {
 			if err.Error() == "EOF" {
@@ -105,8 +103,10 @@ func (p *LineReader) read(num int64) ([]byte, error) {
 	var count int64 = 0
 	var buf = []byte{}
 
-	for p.scanner.Scan() {
-		line := append(p.scanner.Bytes(), '\n')
+	scanner := bufio.NewScanner(p.fd)
+
+	for scanner.Scan() {
+		line := append(scanner.Bytes(), '\n')
 		buf = append(buf, line...)
 
 		count += 1
@@ -115,7 +115,7 @@ func (p *LineReader) read(num int64) ([]byte, error) {
 		}
 	}
 
-	if err := p.scanner.Err(); err != nil {
+	if err := scanner.Err(); err != nil {
 		return nil, errors.Wrap(err, "failed read line")
 	}
 
