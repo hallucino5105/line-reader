@@ -1,4 +1,4 @@
-module hallucino5105/line-reader
+module github.com/hallucino5105/line-reader
 
 go 1.13
 
